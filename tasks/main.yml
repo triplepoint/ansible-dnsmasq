@@ -1,0 +1,19 @@
+---
+- name: Ensure dnsmasq is installed
+  apt: name=dnsmasq state=present
+
+- name: Ensure dnsmasq config file is installed
+  template:
+      src: dnsmasq.conf.j2
+      dest: /etc/dnsmasq.conf
+      validate: /usr/sbin/dnsmasq -C %s --test
+  notify: restart dnsmasq
+
+- name: Ensure the /etc/hosts file has a line for the router for all its ip addresses
+  lineinfile:
+      path: /etc/hosts
+      regexp: "^{{item}}"
+      line: "{{ item }}\t{{ dnsmasq_hostname }}.{{ dnsmasq_domain }}\t{{ dnsmasq_hostname }}"
+      insertafter: '^127.0.0.1\s+localhost'
+  with_items: "{{ dnsmasq_ip_addresses }}"
+  notify: restart dnsmasq

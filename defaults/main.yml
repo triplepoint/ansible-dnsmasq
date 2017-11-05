@@ -1,0 +1,53 @@
+---
+# The hostname to give the gateway, on the network
+dnsmasq_hostname: myrouter
+
+# The domain name added to each DHCP client hostname,
+# to make a FQDN
+dnsmasq_domain: local
+
+# A list of IP addresses to resolve to the gateway's hostname
+# These will get inserted into /etc/hosts as additional resolutions for the
+# dnsmasq_hostname.dnsmasq_domain host.  This let's dnsmasq resolve the
+# gateway itself as a DNS hostname.
+dnsmasq_ip_addresses:
+  - 192.168.1.1
+
+# Upstream DNS servers, where DNS resolution that can't be handled locally will
+# be forwarded.
+# By default, these are the Google DNS servers.  Note that the IPV6 servers
+# are also listed.
+dnsmasq_upstream_dns_servers:
+  - "8.8.8.8"
+  - "8.8.4.4"
+  - "2001:4860:4860::8888"
+  - "2001:4860:4860::8844"
+
+# This list of network interface names is a whitelist of interfaces
+# on which DNS and DHCP will listen
+dnsmasq_network_interface_whitelist: []
+  #- eth1
+
+# This list of network interface names is a blacklist of interfaces
+# on which DNS and DHCP will refuse to answer
+dnsmasq_network_interface_blacklist: []
+  #- eth0
+
+# Define which IP-address ranges will have DHCP leases assigned
+dnsmasq_dhcp_ranges:
+  - { start: "192.168.1.10", # start of the assigned range
+      end: "192.168.1.150",  # End of the assigned range.  Can also be "static", for ranges that won't assign hosts without an explicit dhcp-host definition
+      ttl: "12h",            # How long do leases live?  Typically an hour count like "6h"
+      interface: "eth1"      # optional, the network interface on which to assign the range
+    }
+
+# A list of interfaces for which the NTP server should be announced?
+dnsmasq_announce_ntp_server_interfaces: []
+  #- eth1
+
+# Define hosts with reserved DHCP leases, if any
+dnsmasq_reserved_hosts: []
+  # - { MAC_address: "aa:bb:cc:11:22:33", # May be a comma-separated list string, for devices with more than one MAC address (like devices with WIFI and ethernet adapters, for example)
+  #     ip_address: "192.168.1.10",
+  #     name: "laptop"
+  #   }
