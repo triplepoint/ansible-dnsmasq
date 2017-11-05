@@ -17,3 +17,6 @@
       insertafter: '^127.0.0.1\s+localhost'
   with_items: "{{ dnsmasq_ip_addresses }}"
   notify: restart dnsmasq
+
+# TODO: the /etc/hosts file is also a source for arbitrary domains to resolve for DNS
+# clients.  We need a way to provision DNS names there, from configuration.
