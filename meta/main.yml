@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Jonathan Hanson
+  description: The Dnsmasq DNS and DHCP server
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+  galaxy_tags:
+    - dnsmassq
+    - dhcp
+    - dns
+dependencies: []
