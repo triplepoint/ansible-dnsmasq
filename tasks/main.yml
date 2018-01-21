@@ -1,6 +1,6 @@
 ---
 - name: Ensure dnsmasq is installed
-  apt: name=dnsmasq state=present
+  package: name=dnsmasq state=present
 
 - name: Ensure dnsmasq config file is installed
   template:
