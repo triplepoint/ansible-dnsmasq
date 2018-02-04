@@ -58,3 +58,10 @@ dnsmasq_reserved_hosts: []
   #     ip_address: "192.168.1.10",
   #     name: "laptop"
   #   }
+
+# Additional domain names to resolve to arbitrary IP addreses.  This allows,
+# for example, domains to be defined for the local LAN.
+dnsmasq_supplemental_domain_names: []
+  # - { ip_address: "192.168.1.123",
+  #     names: ["one.fish", "two.fish", "red.fish"]
+  #   }

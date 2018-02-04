@@ -12,11 +12,16 @@
 - name: Ensure the /etc/hosts file has a line for the router for all its ip addresses
   lineinfile:
       path: /etc/hosts
-      regexp: "^{{item}}"
+      regexp: "^{{ item }}"
       line: "{{ item }}\t{{ dnsmasq_hostname }}.{{ dnsmasq_domain }}\t{{ dnsmasq_hostname }}"
       insertafter: '^127.0.0.1\s+localhost'
   with_items: "{{ dnsmasq_ip_addresses }}"
   notify: restart dnsmasq
 
-# TODO: the /etc/hosts file is also a source for arbitrary domains to resolve for DNS
-# clients.  We need a way to provision DNS names there, from configuration.
+- name: Ensure additional domain names are present
+  lineinfile:
+      path: /etc/hosts
+      regexp: "^{{ item.ipaddress }}"
+      line: "{{ item.ipaddress }}\t{{ item.names | join("\t") }}"
+  with_items: "{{ dnsmasq_supplemental_domain_names }}"
+  notify: restart dnsmasq
