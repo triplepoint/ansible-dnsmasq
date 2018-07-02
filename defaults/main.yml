@@ -8,10 +8,10 @@ dnsmasq_hostname: myrouter
 dnsmasq_domain: local
 
 # A list of IP addresses to resolve to the gateway's hostname
-# These will get inserted into /etc/hosts as additional resolutions for the
-# `dnsmasq_hostname.dnsmasq_domain` host.  This let's dnsmasq resolve the
-# gateway itself as a DNS hostname.  Installations with more than one isolated
-# network should have an address per network.
+# These will get inserted into /etc/dnsmasq.conf as additional resolutions
+# for the `dnsmasq_hostname.dnsmasq_domain` host.  This let's dnsmasq resolve
+# the gateway itself as a DNS hostname.  Installations with more than one
+# isolated network should have an address per network.
 dnsmasq_ip_addresses:
   - 192.168.1.1
 

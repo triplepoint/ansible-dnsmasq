@@ -8,20 +8,3 @@
       dest: /etc/dnsmasq.conf
       validate: /usr/sbin/dnsmasq -C %s --test
   notify: restart dnsmasq
-
-- name: Ensure the /etc/hosts file has a line for the router for all its ip addresses
-  lineinfile:
-      path: /etc/hosts
-      regexp: "^{{ item }}"
-      line: "{{ item }}\t{{ dnsmasq_hostname }}.{{ dnsmasq_domain }}\t{{ dnsmasq_hostname }}"
-      insertafter: '^127.0.0.1\s+localhost'
-  with_items: "{{ dnsmasq_ip_addresses }}"
-  notify: restart dnsmasq
-
-- name: Ensure additional domain names are present
-  lineinfile:
-      path: /etc/hosts
-      regexp: "^{{ item.ip_address }}"
-      line: "{{ item.ip_address }}\t{{ item.names | join('\t') }}"
-  with_items: "{{ dnsmasq_supplemental_domain_names }}"
-  notify: restart dnsmasq
