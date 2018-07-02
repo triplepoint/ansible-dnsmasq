@@ -30,38 +30,38 @@ dnsmasq_upstream_dns_servers:
 # on which DNS and DHCP will listen.  Leaving this list empty will imply
 # "listen on all interfaces"
 dnsmasq_network_interface_whitelist: []
-  #- eth1
+# - eth1
 
 # This list of network interface names is a blacklist of interfaces
 # on which DNS and DHCP will refuse to answer.  Leave it blank to mean "don't
 # blacklist any interfaces"
 dnsmasq_network_interface_blacklist: []
-  #- eth0
+# - eth0
 
 # Define which IP-address ranges will have DHCP leases assigned
 dnsmasq_dhcp_ranges:
-  - { start: "192.168.1.10", # start of the assigned range
-      end: "192.168.1.150",  # End of the assigned range.  Can also be the word "static", for ranges that won't assign hosts without an explicit dhcp-host definition
-      ttl: "12h",            # How long do leases live?  Typically an hour count like "6h"
-      interface: "eth1"      # optional, the network interface on which to assign the range
-    }
+  - { start: "192.168.1.10",  # start of the assigned range
+      end: "192.168.1.150",   # End of the assigned range.  Can also be the word "static", for ranges that won't assign hosts without an explicit dhcp-host definition
+      ttl: "12h",             # How long do leases live?  Typically an hour count like "6h"
+      interface: "eth1"       # optional, the network interface on which to assign the range
+  }
 
 # A list of interfaces for which the NTP server should be announced
 dnsmasq_announce_ntp_server_interfaces: []
-  #- eth1
+# - eth1
 
 # Define hosts with reserved DHCP leases, if any.  This is useful in combination
 # with `dnsmasq_dhcp_ranges` range definitions above with "static" `end` values,
 # allowing you to provision assigned static IP addresses.
 dnsmasq_reserved_hosts: []
-  # - { MAC_address: "aa:bb:cc:11:22:33", # May be a comma-separated list string, for devices with more than one MAC address (like devices with WIFI and ethernet adapters, for example)
-  #     ip_address: "192.168.1.10",
-  #     name: "laptop"
-  #   }
+# - { MAC_address: "aa:bb:cc:11:22:33",  # May be a comma-separated list string, for devices with more than one MAC address (like devices with WIFI and ethernet adapters, for example)
+#     ip_address: "192.168.1.10",
+#     name: "laptop"
+# }
 
 # Additional domain names to resolve to arbitrary IP addreses.  This allows,
 # for example, domains to be defined for the local LAN.
 dnsmasq_supplemental_domain_names: []
-  # - { ip_address: "192.168.1.123",
-  #     names: ["one.fish", "two.fish", "red.fish"]
-  #   }
+# - { ip_address: "192.168.1.123",
+#     names: ["one.fish", "two.fish", "red.fish"]
+# }
