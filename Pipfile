@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+[packages]
+ansible = "==2.6.*"
+molecule = "==2.15.*"
+docker = "<3"
