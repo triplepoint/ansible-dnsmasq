@@ -15,7 +15,7 @@ env:
     - PIPENV_IGNORE_VIRTUALENVS=1
 
 before_install:
-  - pip install pipenv
+  - pip install --upgrade pipenv
 
 install:
   - yes | pipenv install --dev --deploy
