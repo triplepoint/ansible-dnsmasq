@@ -1,18 +1,20 @@
 ---
 language: python
+python:
+  - "3.7"
+
+env:
+  global:
+    - PIPENV_IGNORE_VIRTUALENVS=1
 
 sudo: required
 
 services:
   - docker
 
-env:
-  global:
-    - PIPENV_IGNORE_VIRTUALENVS=1
-
 install:
   - pip install pipenv
-  - pipenv install --deploy
+  - yes | pipenv install --deploy
 
 script:
   - pipenv run molecule test
