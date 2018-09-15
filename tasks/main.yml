@@ -1,4 +1,11 @@
 ---
+- name: Ensure systemd-resolved isn't set up to handle DNS resolution
+  systemd:
+      name: systemd-resolved
+      state: stopped
+      enabled: false
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version is version('18.04', '>=')
+
 - name: Ensure dnsmasq is installed
   package: name=dnsmasq state=present
 
