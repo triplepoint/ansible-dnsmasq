@@ -13,7 +13,7 @@ env:
     - MOLECULE_DISTRO: ubuntu1804
 
 before_install:
-  - pip install --upgrade "pipenv==2018.10.13"
+  - pip install --upgrade pipenv
 
 install:
   - yes | pipenv install --dev --deploy
