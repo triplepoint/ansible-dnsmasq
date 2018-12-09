@@ -1,8 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  pre_tasks:
-    - name: Update the apt-cache, if necessary
-      apt: update_cache=yes cache_valid_time=86400
   roles:
     - role: ansible-dnsmasq

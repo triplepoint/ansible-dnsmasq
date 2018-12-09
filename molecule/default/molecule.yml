@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: molecule-dnsmasq
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1604}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
