@@ -7,7 +7,9 @@
   when: ansible_distribution == "Ubuntu" and ansible_distribution_version is version('18.04', '>=')
 
 - name: Ensure dnsmasq is installed
-  package: name=dnsmasq state=present
+  package:
+    name: dnsmasq
+    state: present
 
 - name: Ensure dnsmasq config file is installed
   template:
