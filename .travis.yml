@@ -19,7 +19,7 @@ before_install:
   - pip install --upgrade pipenv
 
 install:
-  - yes | pipenv install --dev --deploy
+  - yes | pipenv install --deploy
 
 script:
   - pipenv run molecule test
