@@ -4,7 +4,7 @@
       name: systemd-resolved
       state: stopped
       enabled: false
-  when: ansible_distribution == "Ubuntu" and ansible_distribution_version is version('18.04', '>=')
+  when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version'] is version('18.04', '>=')
 
 - name: Ensure dnsmasq is installed
   package:
