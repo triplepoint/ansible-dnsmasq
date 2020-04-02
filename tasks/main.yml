@@ -1,6 +1,6 @@
 ---
 - name: Ensure systemd-resolved isn't set up to handle DNS resolution
-  systemd:
+  service:
       name: systemd-resolved
       state: stopped
       enabled: false
