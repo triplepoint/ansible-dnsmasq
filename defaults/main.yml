@@ -47,7 +47,9 @@ dnsmasq_dhcp_ranges: []
   #     tag: "sometag"          # optional, a tag to be set which can be used elsewhere to scope configurations for clients in this range.
   # }
 
-# A list of tags for which the NTP server should be announced
+# A list of tags for which the NTP server should be announced.  Note that a default tag
+# named the same as the request's interface is always present by default, so you can
+# use an interface name here as well as custom tags defined above.
 dnsmasq_announce_ntp_server_tags: []
   # - sometag
 

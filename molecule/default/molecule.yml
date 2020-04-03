@@ -16,6 +16,36 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  inventory:
+    group_vars:
+      all:
+        dnsmasq_network_interface_whitelist:
+          - eth1
+          - eth2
+        dnsmasq_network_interface_blacklist:
+          - eth0
+        dnsmasq_dhcp_ranges:
+          - start: "192.168.1.10"
+            end: "192.168.1.150"
+            ttl: "12h"
+            interface: "eth1"
+            tag: "sometag"
+          - start: "192.168.2.10"
+            end: "192.168.2.150"
+            ttl: "12h"
+            interface: "eth2"
+            tag: "someothertag"
+        dnsmasq_announce_ntp_server_tags:
+          - sometag
+          - someothertag
+        dnsmasq_reserved_hosts:
+          - MAC_address: "aa:bb:cc:11:22:33"
+            ip_address: "192.168.1.10"
+            name: "laptop"
+        dnsmasq_supplemental_domain_names:
+          - ip_address: "192.168.1.123"
+            names: ["one.fish", "two.fish", "red.fish"]
+
 verifier:
   name: testinfra
 lint: |
