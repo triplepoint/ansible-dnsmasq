@@ -66,9 +66,9 @@ dhcp-range={{ dhcp_range.interface+"," if dhcp_range.interface is defined else "
 # Define any DHCP options to announce to clients
 # Note, "0.0.0.0" and "[::]" mean "the machine on which dnsmasq is running", for
 # ipv4 and ipv6 respectively
-{% for ntp_server_interface in dnsmasq_announce_ntp_server_interfaces %}
-dhcp-option={{ ntp_server_interface }},option:ntp-server,0.0.0.0
-# dhcp-option=option6:ntp-server,[::]
+{% for ntp_server_tag in dnsmasq_announce_ntp_server_tags %}
+dhcp-option=tag:{{ ntp_server_tag }},option:ntp-server,0.0.0.0
+# dhcp-option=tag:{{ ntp_server_tag }},option6:ntp-server,[::]
 {% endfor %}
 
 # Static leases and hostnames

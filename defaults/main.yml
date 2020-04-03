@@ -39,16 +39,17 @@ dnsmasq_network_interface_blacklist: []
 # - eth0
 
 # Define which IP-address ranges will have DHCP leases assigned
-dnsmasq_dhcp_ranges:
-  - { start: "192.168.1.10",  # start of the assigned range
-      end: "192.168.1.150",   # End of the assigned range.  Can also be the word "static", for ranges that won't assign hosts without an explicit dhcp-host definition
-      ttl: "12h",             # How long do leases live?  Typically an hour count like "6h"
-      interface: "eth1"       # optional, the network interface on which to assign the range
-  }
+dnsmasq_dhcp_ranges: []
+  # - { start: "192.168.1.10",  # start of the assigned range
+  #     end: "192.168.1.150",   # End of the assigned range.  Can also be the word "static", for ranges that won't assign hosts without an explicit dhcp-host definition
+  #     ttl: "12h",             # How long do leases live?  Typically an hour count like "6h"
+  #     interface: "eth1",      # optional, the network interface on which to assign the range.  Not providing this will make this rule apply to all requests.
+  #     tag: "sometag"          # optional, a tag to be set which can be used elsewhere to scope configurations for clients in this range.
+  # }
 
-# A list of interfaces for which the NTP server should be announced
-dnsmasq_announce_ntp_server_interfaces: []
-# - eth1
+# A list of tags for which the NTP server should be announced
+dnsmasq_announce_ntp_server_tags: []
+  # - sometag
 
 # Define hosts with reserved DHCP leases, if any.  This is useful in combination
 # with `dnsmasq_dhcp_ranges` range definitions above with "static" `end` values,
