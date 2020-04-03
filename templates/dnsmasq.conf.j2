@@ -60,7 +60,7 @@ except-interface={{ interface }}
 
 # Define DHCP ranges
 {% for dhcp_range in dnsmasq_dhcp_ranges %}
-dhcp-range={{ dhcp_range.interface+"," if dhcp_range.interface is defined else "" }}{{ dhcp_range.start }},{{ dhcp_range.end }},{{ dhcp_range.ttl }}
+dhcp-range={{ "tag:"+dhcp_range.interface+"," if dhcp_range.interface is defined else "" }}{{ "set:"+dhcp_range.tag+"," if dhcp_range.tag is defined else "" }}{{ dhcp_range.start }},{{ dhcp_range.end }},{{ dhcp_range.ttl }}
 {% endfor %}
 
 # Define any DHCP options to announce to clients
