@@ -1,19 +1,8 @@
 ---
-# The hostname to give the gateway, on the network
-dnsmasq_hostname: myrouter
-
 # The domain name added to each DHCP client hostname,
 # to make a FQDN
 # for example: "local" would result in "some-hostname.local"
 dnsmasq_domain: local
-
-# A list of IP addresses to resolve to the gateway's hostname
-# These will get inserted into /etc/dnsmasq.conf as additional resolutions
-# for the `dnsmasq_hostname.dnsmasq_domain` host.  This let's dnsmasq resolve
-# the gateway itself as a DNS hostname.  Installations with more than one
-# isolated network should have an address per network.
-dnsmasq_ip_addresses:
-  - 192.168.1.1
 
 # Upstream DNS servers, where DNS resolution that can't be handled locally will
 # be forwarded.
@@ -47,12 +36,6 @@ dnsmasq_dhcp_ranges: []
   #     tag: "sometag"          # optional, a tag to be set which can be used elsewhere to scope configurations for clients in this range.
   # }
 
-# A list of tags for which the NTP server should be announced.  Note that a default tag
-# named the same as the request's interface is always present by default, so you can
-# use an interface name here as well as custom tags defined above.
-dnsmasq_announce_ntp_server_tags: []
-  # - sometag
-
 # Define hosts with reserved DHCP leases, if any.  This is useful in combination
 # with `dnsmasq_dhcp_ranges` range definitions above with "static" `end` values,
 # allowing you to provision assigned static IP addresses.
@@ -63,8 +46,20 @@ dnsmasq_reserved_hosts: []
   # }
 
 # Additional domain names to resolve to arbitrary IP addreses.  This allows,
-# for example, domains to be defined for the local LAN.
+# for example, domains to be defined for the local LAN.  It's not a bad idea
+# to add a domain name for your gateway machine.
 dnsmasq_supplemental_domain_names: []
-# - { ip_address: "192.168.1.123",
-#     names: ["one.fish", "two.fish", "red.fish"]
-# }
+  # - { ip_address: "192.168.1.1",
+  #     names: ["myrouter.local"]
+  #   }
+  # - { ip_address: "192.168.1.123",
+  #     names: ["one.fish", "two.fish", "red.fish"]
+  # }
+
+# A list of dhcp options to pass along to clients that match ALL the given tags.
+# Note that a default tag named the same as the request's interface is always present
+# by default, so you can use an interface name here as well as custom tags defined above.
+dnsmasq_dhcp_options: []
+  # - name: "option:ntp-server"
+  #   value: "0.0.0.0"
+  #   tags: [sometag]

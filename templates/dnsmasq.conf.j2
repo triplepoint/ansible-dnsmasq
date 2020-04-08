@@ -15,10 +15,40 @@ domain-needed
 # Never forward addresses in the non-routed address spaces.
 bogus-priv
 
+# Ignore resolv.conf and any other resolution source other than this file
+no-resolv
+
+# Forwarding DNS servers
+{% for server in dnsmasq_upstream_dns_servers %}
+server={{ server }}
+{% endfor %}
+
+# Local-only domain resolution - only resolved from DHCP
+local=/{{ dnsmasq_domain }}/
+
+# Additional hostname resolution
+{% for host in dnsmasq_supplemental_domain_names %}
+{% for name in host.names %}
+address=/{{ name }}/{{ host.ip_address }}
+{% endfor %}
+{% endfor %}
+
+# Whitelisted interfaces (if any)
+{% for interface in dnsmasq_network_interface_whitelist %}
+interface={{ interface }}
+{% endfor %}
+
+# Blacklisted interfaces (if any)
+{% for interface in dnsmasq_network_interface_blacklist %}
+except-interface={{ interface }}
+{% endfor %}
+
+# Don't read the /etc/hosts file for name resolution
+no-hosts
+
 # Set up local domain names
 expand-hosts
 domain={{ dnsmasq_domain }}
-server=/{{ dnsmasq_domain }}/
 
 # Own all DHCP leases on the network
 dhcp-authoritative
@@ -37,38 +67,9 @@ rebind-localhost-ok
 # Legacy stuff for old DHCP clients
 dhcp-broadcast=tag:needs-broadcast
 
-# Don't read the /etc/hosts file for name resolution
-no-hosts
-
-# Ignore resolv.conf and any other resolution source other than this file
-no-resolv
-
-# Forwarding DNS servers
-{% for server in dnsmasq_upstream_dns_servers %}
-server={{ server }}
-{% endfor %}
-
-# Whitelisted interfaces (if any)
-{% for interface in dnsmasq_network_interface_whitelist %}
-interface={{ interface }}
-{% endfor %}
-
-# Blacklisted interfaces (if any)
-{% for interface in dnsmasq_network_interface_blacklist %}
-except-interface={{ interface }}
-{% endfor %}
-
 # Define DHCP ranges
 {% for dhcp_range in dnsmasq_dhcp_ranges %}
 dhcp-range={{ "tag:"+dhcp_range.interface+"," if dhcp_range.interface is defined else "" }}{{ "set:"+dhcp_range.tag+"," if dhcp_range.tag is defined else "" }}{{ dhcp_range.start }},{{ dhcp_range.end }},{{ dhcp_range.ttl }}
-{% endfor %}
-
-# Define any DHCP options to announce to clients
-# Note, "0.0.0.0" and "[::]" mean "the machine on which dnsmasq is running", for
-# ipv4 and ipv6 respectively
-{% for ntp_server_tag in dnsmasq_announce_ntp_server_tags %}
-dhcp-option=tag:{{ ntp_server_tag }},option:ntp-server,0.0.0.0
-# dhcp-option=tag:{{ ntp_server_tag }},option6:ntp-server,[::]
 {% endfor %}
 
 # Static leases and hostnames
@@ -76,12 +77,9 @@ dhcp-option=tag:{{ ntp_server_tag }},option:ntp-server,0.0.0.0
 dhcp-host={{ host.MAC_address }},{{ host.ip_address }},{{ host.name }}
 {% endfor %}
 
-# Additional hostname resolution
-{% for address in dnsmasq_ip_addresses %}
-address=/{{ dnsmasq_hostname }}.{{ dnsmasq_domain }}/{{ address }}
-{% endfor %}
-{% for host in dnsmasq_supplemental_domain_names %}
-{% for name in host.names %}
-address=/{{ name }}/{{ host.ip_address }}
-{% endfor %}
+# Define any DHCP options to announce to clients
+# Note, "0.0.0.0" and "[::]" mean "the machine on which dnsmasq is running", for
+# ipv4 and ipv6 respectively
+{% for dhcp_option in dnsmasq_dhcp_options %}
+dhcp-option=tag:{{ dhcp_option.tag }},{{ dhcp_option.name }},{{ dhcp_option.value }}
 {% endfor %}

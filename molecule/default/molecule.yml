@@ -35,9 +35,13 @@ provisioner:
             ttl: "12h"
             interface: "eth2"
             tag: "someothertag"
-        dnsmasq_announce_ntp_server_tags:
-          - sometag
-          - someothertag
+        dnsmasq_dhcp_options:
+          - name: "option:ntp-server"
+            value: "0.0.0.0"
+            tag: "sometag"
+          - name: "option:ntp-server"
+            value: "0.0.0.0"
+            tag: "someothertag"
         dnsmasq_reserved_hosts:
           - MAC_address: "aa:bb:cc:11:22:33"
             ip_address: "192.168.1.10"
