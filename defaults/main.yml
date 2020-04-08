@@ -30,13 +30,13 @@ dnsmasq_upstream_dns_servers:
 # on which DNS and DHCP will listen.  Leaving this list empty will imply
 # "listen on all interfaces"
 dnsmasq_network_interface_whitelist: []
-# - eth1
+  # - eth1
 
 # This list of network interface names is a blacklist of interfaces
 # on which DNS and DHCP will refuse to answer.  Leave it blank to mean "don't
 # blacklist any interfaces"
 dnsmasq_network_interface_blacklist: []
-# - eth0
+  # - eth0
 
 # Define which IP-address ranges will have DHCP leases assigned
 dnsmasq_dhcp_ranges: []
@@ -57,10 +57,10 @@ dnsmasq_announce_ntp_server_tags: []
 # with `dnsmasq_dhcp_ranges` range definitions above with "static" `end` values,
 # allowing you to provision assigned static IP addresses.
 dnsmasq_reserved_hosts: []
-# - { MAC_address: "aa:bb:cc:11:22:33",  # May be a comma-separated list string, for devices with more than one MAC address (like devices with WIFI and ethernet adapters, for example)
-#     ip_address: "192.168.1.10",
-#     name: "laptop"
-# }
+  # - { MAC_address: "aa:bb:cc:11:22:33",  # May be a comma-separated list string, for devices with more than one MAC address (like devices with WIFI and ethernet adapters, for example)
+  #     ip_address: "192.168.1.10",
+  #     name: "laptop"
+  # }
 
 # Additional domain names to resolve to arbitrary IP addreses.  This allows,
 # for example, domains to be defined for the local LAN.
