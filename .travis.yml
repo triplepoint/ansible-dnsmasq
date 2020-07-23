@@ -1,6 +1,6 @@
 ---
+os: linux
 dist: bionic
-sudo: required
 language: python
 python:
   - "3.8"
@@ -9,11 +9,16 @@ services:
 
 env:
   global:
-    - PIPENV_IGNORE_VIRTUALENVS: 1
-  matrix:
-    - MOLECULE_DISTRO: ubuntu1604
-    - MOLECULE_DISTRO: ubuntu1804
-    - MOLECULE_DISTRO: ubuntu2004
+    - PIPENV_IGNORE_VIRTUALENVS=1
+  jobs:
+    - MOLECULE_DISTRO=ubuntu1604
+    - MOLECULE_DISTRO=ubuntu1804
+    - MOLECULE_DISTRO=ubuntu2004
+
+jobs:
+  allow_failures:
+    - env:
+        MOLECULE_DISTRO=ubuntu1604
 
 before_install:
   - sudo apt-get -qq update
