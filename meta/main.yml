@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: dnsmasq
+  namespace: triplepoint
   author: Jonathan Hanson
   description: The Dnsmasq DNS and DHCP server
   license: MIT
