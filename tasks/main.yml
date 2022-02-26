@@ -16,4 +16,5 @@
     src: dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
     validate: /usr/sbin/dnsmasq -C %s --test
+    mode: 0644
   notify: restart dnsmasq
