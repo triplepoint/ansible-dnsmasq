@@ -1,4 +1,4 @@
-# Intro [![Build Status](https://www.travis-ci.com/triplepoint/ansible-dnsmasq.svg?branch=main)](https://www.travis-ci.com/triplepoint/ansible-dnsmasq)
+# Intro
 Set up and install `dnsmasq`, to handle DHCP and DNS.
 
 ## Requirements
