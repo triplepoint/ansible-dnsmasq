@@ -4,6 +4,6 @@
   pre_tasks:
     - name: Update the apt-cache, if necessary
       apt:
-        update_cache: yes
+        update_cache: true
         cache_valid_time: 86400
       when: ansible_facts['os_family'] == 'Debian'
