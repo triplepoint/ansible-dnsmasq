@@ -53,6 +53,9 @@ domain={{ dnsmasq_domain }}
 # Own all DHCP leases on the network
 dhcp-authoritative
 
+# Set the cachesize here.
+cache-size={{ dnsmasq_cache_size }}
+
 # Consider which interface a DNS request is coming from, when resolving
 # the name
 localise-queries

@@ -15,6 +15,8 @@ dnsmasq_upstream_dns_servers:
   - "2001:4860:4860::8888"
   - "2001:4860:4860::8844"
 
+dnsmasq_cache_size: 5000
+
 # This list of network interface names is a whitelist of interfaces
 # on which DNS and DHCP will listen.  Leaving this list empty will imply
 # "listen on all interfaces"
