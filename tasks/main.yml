@@ -18,3 +18,6 @@
     validate: /usr/sbin/dnsmasq -C %s --test
     mode: 0644
   notify: restart dnsmasq
+
+- name: Ensure Dnsmasq changes take effect before we go on
+  meta: flush_handlers
