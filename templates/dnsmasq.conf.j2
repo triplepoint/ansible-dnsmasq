@@ -15,8 +15,14 @@ domain-needed
 # Never forward addresses in the non-routed address spaces.
 bogus-priv
 
+# Forward to the DNS servers in the order they're defined, not randomly
+strict-order
+
 # Ignore resolv.conf and any other resolution source other than this file
 no-resolv
+
+# Write logs asynchronously, instead of waiting for syslog to return, with a queue depth
+log-async=5
 
 # Forwarding DNS servers
 {% for server in dnsmasq_upstream_dns_servers %}
