@@ -1,23 +1,23 @@
 ---
 - name: Ensure dnsmasq is installed
-  package:
+  ansible.builtin.package:
     name: dnsmasq
     state: present
 
 - name: Ensure systemd-resolved isn't set up to handle DNS resolution
-  service:
+  ansible.builtin.service:
     name: systemd-resolved
     state: stopped
     enabled: false
   when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version'] is version('18.04', '>=')
 
 - name: Ensure dnsmasq config file is installed
-  template:
+  ansible.builtin.template:
     src: dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
     validate: /usr/sbin/dnsmasq -C %s --test
     mode: 0644
-  notify: restart dnsmasq
+  notify: Restart dnsmasq
 
 - name: Ensure Dnsmasq changes take effect before we go on
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
